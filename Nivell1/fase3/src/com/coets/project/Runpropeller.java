@@ -1,51 +1,67 @@
 package com.coets.project;
-
-
-import javax.swing.JOptionPane;
-
 import com.coets.domain.*;
 
 
 
-public class Runpropeller implements Runnable{
-	Propulsion p;
+public class Runpropeller extends Thread{
+	private Propulsion p;
+	private int isBrakeSpeed=-1;
 	
 	public Runpropeller(Propulsion p) {
 		this.p=p;
 	}
 	
 	
+	
+	
+	public int getIsBrakeSpeed() {
+		return isBrakeSpeed;
+	}
+	
+
+	public void setIsBrakeSpeed(int isBrakeSpeed)  {
+		
+		this.isBrakeSpeed = isBrakeSpeed;
+		
+	}
+
+	
+
+
 	@Override
-	public void run(){
+	public  void run(){
 		
 		
-		int whatDoYouWant= Integer.parseInt(JOptionPane.showInputDialog("Insert 0 to Speed Up, or  1 Brake?"));
 		try {
-			if (whatDoYouWant==0) {
+			if (isBrakeSpeed==0) {
 				
-				while(p.getCurrentPower()!=p.getMaxPower()) {
+				while(this.p.getCurrentPower()!=p.getMaxPower() && isBrakeSpeed==0) {
 					
-					System.out.println(Thread.currentThread()+", " +this.p.toString());
+					
 					this.p.SpeedUp();
 				
-					Thread.sleep(500);
+					Thread.sleep(1000);
 				}
 				
-			}else if(whatDoYouWant==1) {
+			}else if(isBrakeSpeed==1) {
+				
+				
 				this.p.setCurrentPower(this.p.getMaxPower());
-				while(p.getCurrentPower()!=0) {
+				
+				
+				while(this.p.getCurrentPower()!=0 ) {
 				
 					System.out.println(Thread.currentThread()+", " +this.p.toString());
 					this.p.Brake();
-					Thread.sleep(500);
+					Thread.sleep(1000);
 				
 				}
 			}
 		}catch (InterruptedException ex) {
 			System.out.println(ex.getMessage());
 		}
-		
-		
-			
+					
 	}
+	
+	
 }

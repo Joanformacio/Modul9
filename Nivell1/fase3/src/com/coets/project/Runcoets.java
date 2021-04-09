@@ -22,7 +22,7 @@ public class Runcoets implements Runnable{
 		try {
 			while(true) {
 			System.out.println( Thread.currentThread()+", " + coet.toString());
-			Thread.sleep(500);
+			Thread.sleep(1000);
 			}
 			
 		}catch (InterruptedException ex) {

@@ -12,6 +12,7 @@ public class Propulsion {
 		
 		this.maxPower=maxPower;
 		this.namePropeller=name;
+		
 	}
 	
 	public String getNamePropeller() {
@@ -19,6 +20,7 @@ public class Propulsion {
 	}
 
 	public int getCurrentPower() {
+		
 		return currentPower;
 	}
 
@@ -32,8 +34,9 @@ public class Propulsion {
 	
 	public void Brake() {
 		if (currentPower==0) {
-			System.out.println("You can not brake, the power is lowest");
+			System.out.println("You can not brake, the power"+ getNamePropeller()+" is lowest");
 		}else {
+			
 			int current=getCurrentPower();
 			current-=1;
 			setCurrentPower(current);
